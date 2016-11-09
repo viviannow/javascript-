@@ -1,0 +1,48 @@
+代码重构（英语：Code refactoring）
+如果在函数中有代码可以   出来， 我们最好 这些代码 进另外一个  的函数 中
+
+提炼函数
+```
+var getUserInfo = function(){
+ajax( 'http:// xxx.com/userInfo', function( data ){
+printDetails( data ); });
+};
+var printDetails = function( data ){
+console.log( 'userId: ' + data.userId ); 
+console.log( 'userName: ' + data.userName );
+console.log( 'nickName: ' + data.nickName );
+};
+```
+合并重复代码
+
+把条件分支语句提炼成函数
+
+合理使用循环
+
+传递对象参数代替过长的参数列表
+```
+setUserInfo({ id: 1314,
+name: 'sven',
+address: 'shenzhen', sex: 'male',
+mobile: '137********', qq: 377876679
+});
+```
+
+用return 退出多重循环
+```
+var flag =false;
+flag =true;
+if(flag=== true){break};
+```
+
+```
+outerloop:
+for(var i =0;i<10;i++){
+  innerloop:
+  for(var j =0;j<10;j++){
+    if(i*j>30){
+      break outerloop;
+    }
+  }
+}
+```
