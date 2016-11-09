@@ -1,0 +1,47 @@
+<html> 
+<head>
+	<title>惰性单例技术</title>
+</head>
+<body>
+	<button id="loginBtn">button</button> 
+	<p>原理：</p>
+	<pre>
+		用一个变量来标志是否创建过对象，如果是，则在下回返回这个建好的对象 
+		让getSingle返回一个新的函数，并用一个亦是result来保存fn的计算结果
+	</pre>
+</body>
+<script>
+// 创建函数 功能
+var createLoginLayer = function(){
+	var div = document.createElement( 'div' );
+	div.innerHTML = 'yes';
+	div.style.display = 'none'; 
+	document.body.appendChild( div );
+	div.style.backgroundColor="#ddd";
+	return div;
+};
+
+// 单例函数 逻辑
+var getSingle = function( fn ){
+
+	var result;
+	return function(){
+		// return result || ( result = fn.apply(this, arguments ) );
+		if(!result){
+			return  result = fn.apply(this, arguments )//一直不明白这里的apply的原理
+		}else{
+			return result;
+		}
+	} 
+};
+
+// 合并功能与逻辑
+var createSingleLoginLayer = getSingle( createLoginLayer );
+
+// 应用
+document.getElementById( 'loginBtn' ).onclick = function(){ 
+	var loginLayer = createSingleLoginLayer(); 
+	loginLayer.style.display = 'block';
+};
+</script>
+</html>
